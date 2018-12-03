@@ -57,7 +57,7 @@ import footer from '@/components/footer06';
 export default {
   name: 'App',
     data(){  
-        return{  
+        return{
             transitionName: 'slide-left', 
             isActive: false,
             isNews: false,
@@ -74,7 +74,7 @@ export default {
 　　　　　　　this.transitionName = 'slide-right';
 　　　　　　} else {
 　　　　　　 this.transitionName = 'slide-left';
-　　　　　}
+　　　　　 }
 　　    this.$router.isBack = false;
 　　},
     $route(to,from){

@@ -22,6 +22,9 @@ export default {
       content : []
     }
   },
+  components : {
+      'vue-feedback' : feedback
+  },
   mounted: function () {
     this.$nextTick(function(){
         this.articid = this.$route.params.articid,

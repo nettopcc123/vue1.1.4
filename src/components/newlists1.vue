@@ -1,12 +1,36 @@
 
 <template>
   <div class="newlists" id="newlists">
-        <vue-newban1></vue-newban1>
-        <vue-banner01></vue-banner01>
-        <ul class="nlist">
-            <li v-for="(value, key) in newList">
+        <!-- <vue-newban1></vue-newban1>
+        <vue-banner01></vue-banner01> -->
+        <ul class="nlist npad">
+            <li v-for="(value, key) in newList" v-if="key < 2">
                 <router-link :to="{ name: 'newsMore1', params: { articid: value.Id , page: num, content: value.Content}}">
-                <span class="nimg"><img :src="require('./../components/img/ban/h/' + value.Image +'.jpg')"></span>
+                <span class="nimg_l"><img :src="require('./../components/img/ban/e/' + value.Image +'.jpg')"></span>
+                <span class="newsCtn_l">
+                    <h2 class="ntit">{{ value.Title | filter | restr }}</h2>
+                    <p class="ntb"><span class="nname">消息来源： {{ value.Source }} </span></p>
+                    <i class="mark2">{{ value.username }}</i>
+                </span>
+                </router-link>
+            </li>
+        </ul>
+        <ul class="nlist npad">
+            <li v-for="(value, key) in newList" v-if="key == 3">
+                <router-link :to="{ name: 'newsMore1', params: { articid: value.Id , page: num, content: value.Content}}">
+                <span class="newsCtn_m">
+                    <h2 class="ntit_m">{{ value.Title | filter | restr }}</h2>
+                    <p class="ntb"><span class="nname">消息来源： {{ value.Source }} </span></p>
+                    <i class="mark2">{{ value.username }}</i>
+                </span>
+                <span class="nimg_m"><img :src="require('./../components/img/ban/e/' + value.Image +'.jpg')"></span>
+                </router-link>
+            </li>
+        </ul>
+        <ul class="nlist">
+            <li v-for="(value, key) in newList" v-if="key > 3 ">
+                <router-link :to="{ name: 'newsMore1', params: { articid: value.Id , page: num, content: value.Content}}">
+                <span class="nimg"><img :src="require('./../components/img/ban/e/' + value.Image +'.jpg')"></span>
                 <span class="newsCtn">
                     <h2 class="ntit">{{ value.Title | filter | restr }}</h2>
                     <p class="ntb"><span class="nname">消息来源： {{ value.Source }} </span></p>
@@ -128,7 +152,7 @@ export default {
             // 对响应错误做点什么
             return Promise.reject(error);
           });
-            axios.get('http://154.48.238.35:8085/UserService.svc/NewsList?newstype=NBA&pageindex=' + num + '&pagesize=10')  /// http://www.hd.me/data.php?callback=dosomething    static/news.json?num  static/news.json  http://misc.opencai.net/consts/lotts.json   /static/news.json
+            axios.get('http://154.48.238.35:8085/UserService.svc/NewsList?newstype=汽车&pageindex=' + num + '&pagesize=10')  /// http://www.hd.me/data.php?callback=dosomething    static/news.json?num  static/news.json  http://misc.opencai.net/consts/lotts.json   /static/news.json
             .then(res => {
               console.log(res)
               res.data.d.Data.forEach(v => {
@@ -177,6 +201,33 @@ export default {
   width:62%;
   float:left;
 }
+.nimg_l{
+  width: 35%;
+  float:left;
+}
+.newsCtn_l{
+  width:62%;
+  float:right;
+}
+
+.nimg_m{
+  width: 100%;
+}
+.nimg_m img{
+  width: 100%;
+}
+.newsCtn_m{
+  width:100%;
+}
+.ntit_m{
+  font-size: 0.18rem;
+  color:#2a2a2a;
+  font-weight: normal;
+  height: 0.28rem;
+  overflow: hidden;
+  line-height: 0.28rem;
+}
+
 .nlist{
   display:block;
   text-align: center;
@@ -227,6 +278,9 @@ export default {
 }
 .fmt40{
   margin-top:0.5rem;
+}
+.npad{
+  padding: 0px!important;
 }
 
 </style>
